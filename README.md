@@ -1,7 +1,16 @@
 # install-ad-on-ec2
 Install Active Directory on Amazon EC2 Windows Server
 
-## Link : [Install Active Directory on Amazon EC2 Windows Server](TBD)
+## Link to YouTube video : [Install Active Directory on Amazon EC2 Windows Server](TBD)
+Agenda
+* Create VPC with two public and two private subnets.
+* Launch Bastion Host Instance in Public Subnet.
+* Launch DC01 in private subnet and configure as primary domain controller for the domain. In this demo, the domain name is "corp.local".
+* Launch DC02 in the other private subnet for high availability and configure as additional (second) domain controller for the domain.
+* Run Powershell commands to verify the installation.
+* Login to DC01 & DC02 as Domain Administrator.
+  
+## [AWS documentation for Working with Self Managed Active Directory with an Amazon RDS for SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServer_SelfManagedActiveDirectory.html)
 
 ## Powershell Commands
 
@@ -23,7 +32,12 @@ Get-WindowsFeature -Name AD-Domain-Services
 Configure an Active Directory Forest & Install Domain Name Service(DNS) Server Service. 
   ```powershell
 $domainName = "<domainName>"              
-Install-ADDSForest -DomainName $domainName -InstallDNS 
+Install-ADDSForest -DomainName $domainName -InstallDNS
+  ```
+
+Set the primary and secondary DNS Server IPs on the Ethernet Adapter
+  ```powershell
+Set-DnsClientServerAddress -InterfaceIndex <InterfaceIndex> -ServerAddresses ("<DC01 IP>", "<DC02 IP>")
   ```
 
 ### DC02
@@ -49,7 +63,6 @@ Set-DnsClientServerAddress -InterfaceIndex <InterfaceIndex> -ServerAddresses ("<
 
 Add an additional Domain Controller for the domain
   ```powershell
-#Add as second domain controller
 $domainName = "<domainName>"
 $domainUser = "<domainNetBIOSName\domainAdministratorUserName>"
 
@@ -60,6 +73,11 @@ $HashArguments = @{
 }
 
 Install-ADDSDomainController @HashArguments 
+  ```
+
+Set the primary and secondary DNS Server IPs on the Ethernet Adapter
+  ```powershell
+Set-DnsClientServerAddress -InterfaceIndex <InterfaceIndex> -ServerAddresses ("<DC02 IP>", "<DC01 IP>")
   ```
 
 
