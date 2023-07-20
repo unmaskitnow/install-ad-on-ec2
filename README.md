@@ -9,8 +9,8 @@ Agenda
 * Launch DC02 in the other private subnet for high availability and configure as additional (second) domain controller for the domain.
 * Run Powershell commands to verify the installation.
 * Login to DC01 & DC02 as Domain Administrator.
-  
-## [AWS documentation for Working with Self Managed Active Directory with an Amazon RDS for SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServer_SelfManagedActiveDirectory.html)
+
+## [Microsoft documentation for Active Directory Port Requirements](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/config-firewall-for-ad-domains-and-trusts)
 
 ## Powershell Commands
 
