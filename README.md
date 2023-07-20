@@ -1,8 +1,9 @@
 # install-ad-on-ec2
 Install Active Directory on Amazon EC2 Windows Server
 
-## Link to YouTube video : [Install Active Directory on Amazon EC2 Windows Server](TBD)
-Agenda
+## Link to YouTube video : [Install Active Directory on Amazon EC2 Windows Server](https://youtu.be/yGWVEyG2sG4)
+
+## Agenda
 * Create VPC with two public and two private subnets.
 * Launch Bastion Host Instance in Public Subnet.
 * Launch DC01 in private subnet and configure as primary domain controller for the domain. In this demo, the domain name is "corp.local".
